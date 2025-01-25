@@ -1,10 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   movement.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/16 15:43:33 by amismail          #+#    #+#             */
+/*   Updated: 2025/01/16 15:43:35 by amismail         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <so_long.h>
 
-static void put_player(t_game *s, char c, int x, int y);
-void up(t_game *s)
+static void	put_player(t_game *s, char c, int x, int y);
+
+void	up(t_game *s)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = s->tmap[0]->row_p;
 	j = s->tmap[0]->col_p;
@@ -27,10 +40,11 @@ void up(t_game *s)
 	if (s->tmap[0]->map[i][j] == 'E' && s->tmap[0]->c == 0)
 		destroy_win(&(*s));
 }
-void down(t_game *s)
+
+void	down(t_game *s)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = s->tmap[0]->row_p;
 	j = s->tmap[0]->col_p;
@@ -53,10 +67,11 @@ void down(t_game *s)
 	if (s->tmap[0]->map[i][j] == 'E' && s->tmap[0]->c == 0)
 		destroy_win(&(*s));
 }
-void right(t_game *s)
+
+void	right(t_game *s)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = s->tmap[0]->row_p;
 	j = s->tmap[0]->col_p;
@@ -65,7 +80,6 @@ void right(t_game *s)
 		put_image(&(*s), '0', j, i);
 		if (s->tmap[0]->map[i][j] == 'E' && s->tmap[0]->c > 0)
 			put_image(&(*s), 'E', j, i);
-
 		s->tmap[0]->col_p = s->tmap[0]->col_p + 1;
 		s->count = s->count + 1;
 		j = s->tmap[0]->col_p;
@@ -80,10 +94,11 @@ void right(t_game *s)
 	if (s->tmap[0]->map[i][j] == 'E' && s->tmap[0]->c == 0)
 		destroy_win(&(*s));
 }
-void left(t_game *s)
+
+void	left(t_game *s)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = s->tmap[0]->row_p;
 	j = s->tmap[0]->col_p;
@@ -107,18 +122,18 @@ void left(t_game *s)
 		destroy_win(&(*s));
 }
 
-static void put_player(t_game *s, char c, int x, int y)
+static void	put_player(t_game *s, char c, int x, int y)
 {
 	if (c == 'w')
 		mlx_put_image_to_window(s->mlx_ptr, s->win_ptr,
-								s->p_w, x * 50, y * 50);
+			s->p_w, x * 50, y * 50);
 	else if (c == 's')
 		mlx_put_image_to_window(s->mlx_ptr, s->win_ptr,
-								s->p_s, x * 50, y * 50);
+			s->p_s, x * 50, y * 50);
 	else if (c == 'd')
 		mlx_put_image_to_window(s->mlx_ptr, s->win_ptr,
-								s->p_d, x * 50, y * 50);
+			s->p_d, x * 50, y * 50);
 	else if (c == 'a')
 		mlx_put_image_to_window(s->mlx_ptr, s->win_ptr,
-								s->p_a, x * 50, y * 50);
+			s->p_a, x * 50, y * 50);
 }

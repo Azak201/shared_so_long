@@ -1,10 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utility.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amismail <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/16 15:43:42 by amismail          #+#    #+#             */
+/*   Updated: 2025/01/16 15:44:02 by amismail         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <so_long.h>
 
-t_map *define_struct(char **map_str)
+t_map	*define_struct(char **map_str)
 {
-	t_map *main_map;
+	t_map	*main_map;
 
 	main_map = (t_map *)malloc(sizeof(t_map));
+	if (!main_map)
+		ft_free(1, map_str, "fail in malloc");
 	main_map->map = map_str;
 	main_map->col_p = 0;
 	main_map->row_p = 0;
@@ -17,10 +31,10 @@ t_map *define_struct(char **map_str)
 	return (main_map);
 }
 
-void find_p(t_map *map)
+void	find_p(t_map *map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (map->map[i])
@@ -32,17 +46,18 @@ void find_p(t_map *map)
 			{
 				map->col_p = j;
 				map->row_p = i;
-				return;
+				return ;
 			}
 			j++;
 		}
 		i++;
 	}
 }
-void find_e(t_map *map)
+
+void	find_e(t_map *map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (map->map[i])
@@ -54,7 +69,7 @@ void find_e(t_map *map)
 			{
 				map->col_e = j;
 				map->row_e = i;
-				return;
+				return ;
 			}
 			j++;
 		}
@@ -62,10 +77,10 @@ void find_e(t_map *map)
 	}
 }
 
-char **create_fmap(t_map **main_map)
+char	**create_fmap(t_map **main_map)
 {
-	int i;
-	char **fmap;
+	int		i;
+	char	**fmap;
 
 	i = 0;
 	while ((*main_map)->map[i] != NULL)
@@ -87,10 +102,11 @@ char **create_fmap(t_map **main_map)
 	fmap[i] = NULL;
 	return (fmap);
 }
-int find_c(t_map *map)
+
+int	find_c(t_map *map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (map->fmap[i] != NULL)
@@ -98,7 +114,7 @@ int find_c(t_map *map)
 		j = 0;
 		while (map->fmap[i][j] != '\0')
 		{
-			if (map->fmap[i][j] == 'C')
+			if (map->fmap[i][j] == 'C' || map->fmap[i][j] == 'E')
 				return (1);
 			j++;
 		}
